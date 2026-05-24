@@ -19,6 +19,6 @@ jobs:
       - name: Run Ansible Deployment
         run: |
 
-           /usr/local/bin/ansible-playbook \
+           ansible-playbook \
             -i inventory/hosts.ini \
             playbooks/deploy.yml
