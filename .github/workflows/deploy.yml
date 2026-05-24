@@ -1,0 +1,45 @@
+name: CI-CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Configure SSH
+        run: |
+
+          mkdir -p ~/.ssh
+
+          echo "${{ secrets.CONTROLLER_KEY }}" > ~/.ssh/id_ed25519
+
+          chmod 600 ~/.ssh/id_ed25519
+
+      - name: Add Controller Node to Known Hosts
+        run: |
+
+          ssh-keyscan -H ${{ secrets.CONTROLLER_IP }} >> ~/.ssh/known_hosts
+
+      - name: Deploy Using Ansible
+        run: |
+
+          ssh ${{ secrets.CONTROLLER_USER }}@${{ secrets.CONTROLLER_IP }} "
+
+            cd company-website-deployment
+
+            git pull
+
+            ansible-playbook \
+              -i inventory/hosts.ini \
+              playbooks/deploy.yml
+          "

@@ -1,5 +1,5 @@
-website_title: "Enterprise Demo Website"
+website_title: "Mahefooz Khan"
 
-website_message: "Deployed automatically using GitHub Actions and Ansible"
+website_message: "Devops Engineer"
 
 web_root: "/var/www/html"
