@@ -1,0 +1,5 @@
+website_title: "Enterprise Demo Website"
+
+website_message: "Deployed automatically using GitHub Actions and Ansible"
+
+web_root: "/var/www/html"

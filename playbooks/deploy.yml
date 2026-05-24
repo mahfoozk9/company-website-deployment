@@ -1,0 +1,6 @@
+- name: Deploy Company Website
+  hosts: webservers
+  become: yes
+
+  roles:
+    - nginx
